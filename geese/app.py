@@ -1,3 +1,4 @@
+import datetime
 from collections import Counter
 from functools import lru_cache as _lru_cache
 from typing import List as _List
@@ -22,6 +23,7 @@ class App:
         self._components = {}
         self._entities = {}
         self._dead_entities= set()
+        self._last_delta = 0.0
 
 
     def add_processor(self, processor_instance: Processor, priority=0) -> None:
@@ -77,4 +79,6 @@ class App:
     def loop_process(self, *args, **kwargs):
         self._process_setup(*args, **kwargs) 
         while True:
+            start = datetime.datetime.now()
             self._process(*args, **kwargs)
+            self._last_delta = (datetime.datetime.now() - start).total_seconds() * 1000 

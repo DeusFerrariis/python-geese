@@ -45,3 +45,8 @@ app._components[3] = (pygame.display.set_mode((400, 400)),)
 app.add_processor(MoveSquares())
 app.add_processor(DrawSquare())
 app.loop_process()
+pygame.draw.rect(
+    app._components[3],
+    (0, 255, 0),
+    (20, 20, 20, 20)
+)
